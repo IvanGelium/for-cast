@@ -1,8 +1,8 @@
 import './searchIcon.svg'
-import './weathericons01.svg'
-import './weathericons17.svg'
-import './weathericons19.svg'
-import './weathericons39.svg'
+import iconPath01 from './weathericons01.svg'
+import iconPath17 from './weathericons17.svg'
+import iconPath19 from './weathericons39.svg'
+import iconPath39 from './weathericons19.svg'
 import { format, add } from 'date-fns'
 // Supports weights 100-800
 import '@fontsource-variable/sora'
@@ -42,6 +42,12 @@ function uiDraw(weatherRes) {
     if (weatherRes == undefined) {
         return
     }
+    if (WC.firstElementChild !== null) {
+        while (WC.firstElementChild !== null) {
+            WC.firstElementChild.remove()
+        }
+    }
+    console.log(WC.firstElementChild)
     console.log(weatherRes)
     header.lastElementChild.lastElementChild.textContent =
         weatherRes.resolvedAddress
@@ -57,6 +63,10 @@ function uiDraw(weatherRes) {
 function createDOMCard(day, hour, weatherData, Cell) {
     const card = document.createElement('div')
     card.className = 'cellcell'
+    const dayUp = document.createElement('div')
+    dayUp.className = 'dayUp'
+    const dayText = document.createElement('div')
+    dayText.className = 'dayText'
     const dayTime = document.createElement('div')
     dayTime.className = 'dayTime'
     let tm = weatherData.days[day].hours[hour].datetime + ''
@@ -73,6 +83,7 @@ function createDOMCard(day, hour, weatherData, Cell) {
     }
     dayDesc.className = 'dayDesc'
     const dayIcon = document.createElement('img')
+    console.log(chooseIcon(weatherData.days[day].hours[hour].conditions))
     dayIcon.src = chooseIcon(weatherData.days[day].hours[hour].conditions)
     dayIcon.className = 'dayIcon'
     const dayBar = document.createElement('div')
@@ -82,10 +93,12 @@ function createDOMCard(day, hour, weatherData, Cell) {
     dayBar.className = 'dayBar'
 
     Cell.appendChild(card)
-    card.appendChild(dayTime)
-    card.appendChild(dayTempa)
-    card.appendChild(dayDesc)
-    card.appendChild(dayIcon)
+    card.appendChild(dayUp)
+    dayUp.appendChild(dayText)
+    dayText.appendChild(dayTime)
+    dayText.appendChild(dayTempa)
+    dayText.appendChild(dayDesc)
+    dayUp.appendChild(dayIcon)
     card.appendChild(dayBar)
 }
 
@@ -112,7 +125,7 @@ function calcBar(tempa) {
         isPlus = true
     }
     const barCoef = Math.abs(tempa / 35)
-    const barHeight = Math.round(50 * barCoef + 5)
+    const barHeight = Math.round(79 * barCoef + 5)
     const barColorCoef = Math.round(255 * barCoef + 30)
     const rgb = colorIsHard(isPlus, barColorCoef)
     return { height: barHeight, rgb: rgb }
@@ -168,12 +181,12 @@ function dayTitleCard(day, weatherData, Cell) {
 function chooseIcon(cond) {
     switch (cond) {
         case 'Clear':
-            return 'url(./weathericons01.svg)'
+            return iconPath01
         case 'Overvast':
-            return 'url(./weathericons39.svg)'
+            return iconPath39
         case 'Partially cloudy':
-            return 'url(./weathericons17.svg)'
+            return iconPath17
         default:
-            return 'url(./weathericons19.svg)'
+            return iconPath19
     }
 }

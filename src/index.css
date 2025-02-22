@@ -278,10 +278,8 @@ input:active {
 
 .dayIcon {
     align-self: center;
-    width: 50%;
-    height: 100%;
-    background-size: cover;
-    background-repeat: no-repeat;
+    width: 10vh;
+    height: 10vh;
 }
 
 .dayTime {
@@ -304,5 +302,4 @@ input:active {
     margin-top: auto;
     width: 100%;
     height: 50%;
-    background-color: rgb(183, 236, 255);
 }
