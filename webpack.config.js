@@ -33,19 +33,6 @@ module.exports = {
                 test: /\.html$/i,
                 loader: 'html-loader',
             },
-
-            {
-                test: /\.(png|jpe?g|gif|svg|webp)$/i, // Регулярное выражение для изображений
-                use: [
-                    {
-                        loader: 'file-loader', // Используем file-loader
-                        options: {
-                            name: '[hash].[ext]', // Имя файла в выходной директории
-                            outputPath: 'images', // Папка для изображений в dist
-                        },
-                    },
-                ],
-            },
         ],
     },
     devtool: 'eval-source-map',

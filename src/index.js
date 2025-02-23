@@ -76,14 +76,13 @@ function createDOMCard(day, hour, weatherData, Cell) {
     dayTempa.className = 'dayTempa'
     const dayDesc = document.createElement('div')
     if (weatherData.days[day].hours[hour].preciptype !== null) {
-        dayDesc.textContent = `${weatherData.days[day].hours[hour].conditions}, ${weatherData.days[day].hours[hour].preciptype[0]} ${weatherData.days[day].hours[hour].precip * 100}% `
+        dayDesc.textContent = `${weatherData.days[day].hours[hour].conditions}, ${weatherData.days[day].hours[hour].preciptype[0]} ${weatherData.days[day].hours[hour].precip * 10}% `
     }
     if (weatherData.days[day].hours[hour].preciptype === null) {
         dayDesc.textContent = `${weatherData.days[day].hours[hour].conditions}`
     }
     dayDesc.className = 'dayDesc'
     const dayIcon = document.createElement('img')
-    console.log(chooseIcon(weatherData.days[day].hours[hour].conditions))
     dayIcon.src = chooseIcon(weatherData.days[day].hours[hour].conditions)
     dayIcon.className = 'dayIcon'
     const dayBar = document.createElement('div')
@@ -165,7 +164,7 @@ function dayTitleCard(day, weatherData, Cell) {
     dayTempa.className = 'dayTempa'
     const dayDesc = document.createElement('div')
     if (weatherData.days[day].preciptype !== null) {
-        dayDesc.textContent = `${weatherData.days[day].conditions}, ${weatherData.days[day].preciptype[0]} ${weatherData.days[day].precip * 100}% `
+        dayDesc.textContent = `${weatherData.days[day].conditions}, ${weatherData.days[day].preciptype[0]} ${weatherData.days[day].precip * 10}% `
     }
     if (weatherData.days[day].preciptype === null) {
         dayDesc.textContent = `${weatherData.days[day].conditions}`
